@@ -32,6 +32,7 @@ type GetUserInfoResponse struct {
 	Gender   string `json:"gender"`
 	PassWord string `json:"pass_word"`
 	NickName string `json:"nick_name"`
+	NickHead string `json:"headurl"`
 }
 
 // UpdateNickNameRequest 修改用户信息返回结构

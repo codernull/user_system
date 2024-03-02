@@ -21,7 +21,7 @@ func InitRouterAndServe() {
 	//健康检查
 	// 用户注册
 	r.POST("/user/register", api.Register)
-	// 用户登录
+	// 用户登录 http://localhost:8585/static/login.html
 	r.POST("/user/login", api.Login)
 	// 用户登出
 	r.POST("/user/logout", AuthMiddleWare(), api.Logout)
@@ -29,9 +29,12 @@ func InitRouterAndServe() {
 	r.GET("/user/get_user_info", AuthMiddleWare(), api.GetUserInfo)
 	// 更新用户信息
 	r.POST("/user/update_nick_name", AuthMiddleWare(), api.UpdateNickName)
+	//更新用户头像
+	r.POST("/uploadpic", AuthMiddleWare(), api.UpdateNickHead)
 
 	r.Static("/static/", "./web/static/")
-	r.Static("/upload/images/", "./web/upload/images/")
+	r.Static("/upload/images/", "./web/static/images/")
+	r.Static("/images/", "./web/static/images/")
 
 	// 启动server
 	port := config.GetGlobalConf().AppConfig.Port

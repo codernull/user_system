@@ -1,0 +1,12 @@
+[2024-01-29 16:18:52] INFO[redis.go:20] redisConfig======={Host:0.0.0.0 Port:8089 DB:0 PassWord: PoolSize:100}
+[2024-01-29 16:18:52] INFO[redis.go:32] res=======OK,err======<nil>
+[2024-01-29 17:22:14] INFO[redis.go:20] redisConfig======={Host:0.0.0.0 Port:8089 DB:0 PassWord: PoolSize:100}
+[2024-01-29 17:22:14] INFO[redis.go:32] res=======OK,err======<nil>
+[2024-01-29 17:38:11] INFO[redis.go:20] redisConfig======={Host:0.0.0.0 Port:8089 DB:0 PassWord: PoolSize:100}
+[2024-01-29 17:38:11] INFO[redis.go:32] res=======OK,err======<nil>
+[2024-01-29 17:38:21] INFO[redis.go:20] redisConfig======={Host:0.0.0.0 Port:8089 DB:0 PassWord: PoolSize:100}
+[2024-01-29 17:38:21] INFO[redis.go:32] res=======OK,err======<nil>
+[2024-01-29 17:38:22] INFO[redis.go:20] redisConfig======={Host:0.0.0.0 Port:8089 DB:0 PassWord: PoolSize:100}
+[2024-01-29 17:38:22] INFO[redis.go:32] res=======OK,err======<nil>
+[2024-01-29 19:16:26] INFO[redis.go:20] redisConfig======={Host:0.0.0.0 Port:8089 DB:0 PassWord: PoolSize:100}
+[2024-01-29 19:16:26] INFO[redis.go:32] res=======OK,err======<nil>

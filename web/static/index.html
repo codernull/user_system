@@ -31,6 +31,7 @@
         <div id="login_control">
             <button type="button" id="btn_edit" onclick="changeNickName()">修改昵称</button>
             <button type="button" id="btn_logout" onclick="logout()">登出</button>
+            <button type="button" id="btn_logout" onclick="logout()">注销</button>
         </div>
     </div>
 </form>
@@ -60,7 +61,7 @@
 
             if (json.code !== 0) {
                 console.log(json.msg)
-                alert("请先登录!" + json.msg)
+                alert("请先登录!2" + json.msg)
                 window.location.href = "login.html"
             }
 
@@ -69,6 +70,7 @@
             previousNickname = json.data.nick_name
 
             console.log("username.value:" + username.value)
+            alert("headlul  " + json.msg)
 
             if (json.data.headurl != "") {
                 console.log("set headurl:" + json.data.headurl)
@@ -131,7 +133,7 @@
             }),
             success: function (result) {
                 if (result.code == 0) {
-                    alert("修改成功");
+                    alert("修改1成功");
                 } else {
                     alert("修改失败")
                 }
@@ -150,15 +152,18 @@
 
         var formData = new FormData();
         formData.append("picture", input.files[0]);
-
+        alert("data :"+formData.getAll("picture"))
         var xhr = new XMLHttpRequest();
-        xhr.open('post', urlPrefix + '/uploadpic?username=' + from_username)
+        xhr.open('POST', urlPrefix + '/uploadpic?username=' + from_username)
         xhr.send(formData);
+        console.log(formData.get("picture"));
 
         xhr.onreadystatechange = function () {
+            alert("data :"+xhr.status)
             if (xhr.readyState === 4 && xhr.status === 200) {
                 console.log(xhr.responseText);
                 var json = eval("(" + xhr.responseText + ")");
+                alert(" headurl :"+json.data.headurl)
                 if (json.code == 0 && json.data.headurl != "") {
                     headurl.src = json.data.headurl
                 } else {

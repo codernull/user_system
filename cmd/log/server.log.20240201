@@ -1,0 +1,22 @@
+[2024-02-01 10:02:54] INFO[api.go:119] UpdateNickName|session=894b7217ee284b2b88e69c6de76a2006
+[2024-02-01 10:02:54] INFO[user.go:133] 292c5ec30e207f538fc9bd699b913c00|UpdateUserNickName access from,user_name=dada|session=894b7217ee284b2b88e69c6de76a2006
+[2024-02-01 10:02:54] INFO[user.go:134] UpdateUserNickName|req==&{dada dada}
+[2024-02-01 10:02:54] INFO[redis.go:20] redisConfig======={Host:0.0.0.0 Port:8089 DB:0 PassWord: PoolSize:100}
+[2024-02-01 10:02:54] INFO[redis.go:32] res=======OK,err======<nil>
+[2024-02-01 10:02:54] INFO[db.go:23] mdb addr:root:123456@(0.0.0.0:8086)/camps_user?charset=utf8&parseTime=True&loc=Local
+[2024-02-01 14:07:17] INFO[api.go:119] UpdateNickName|session=894b7217ee284b2b88e69c6de76a2006
+[2024-02-01 14:10:43] INFO[user.go:133] 048be6a556b11c01c48f2c33f52cd252|UpdateUserNickName access from,user_name=dada|session=894b7217ee284b2b88e69c6de76a2006
+[2024-02-01 14:10:43] INFO[user.go:134] UpdateUserNickName|req==&{dada dada1}
+[2024-02-01 14:10:43] INFO[redis.go:20] redisConfig======={Host:0.0.0.0 Port:8089 DB:0 PassWord: PoolSize:100}
+[2024-02-01 14:10:43] INFO[redis.go:32] res=======OK,err======<nil>
+[2024-02-01 14:11:46] INFO[db.go:23] mdb addr:root:123456@(0.0.0.0:8086)/camps_user?charset=utf8&parseTime=True&loc=Local
+[2024-02-01 14:45:13] INFO[api.go:56] loggin start,user:dada1, password:111111
+[2024-02-01 14:45:13] INFO[redis.go:20] redisConfig======={Host:0.0.0.0 Port:8089 DB:0 PassWord: PoolSize:100}
+[2024-02-01 14:45:13] INFO[redis.go:32] res=======OK,err======<nil>
+[2024-02-01 14:45:13] INFO[db.go:23] mdb addr:root:123456@(0.0.0.0:8086)/camps_user?charset=utf8&parseTime=True&loc=Local
+[2024-02-01 14:45:13] ERROR[user.go:58] Login|用户尚未注册
+[2024-02-01 14:45:20] INFO[api.go:56] loggin start,user:dada1, password:111111
+[2024-02-01 14:45:20] ERROR[user.go:58] Login|用户尚未注册
+[2024-02-01 14:45:29] INFO[api.go:56] loggin start,user:dada, password:111111
+[2024-02-01 14:45:29] INFO[user.go:160] cache_user ======= &{{dada 2024-02-01 09:59:11 +0800 CST} {dada 2024-02-01 14:15:56 +0800 CST} 2 dada male 1 111111 dada1}
+[2024-02-01 14:45:29] INFO[user.go:76] Login successfully, dada@111111 with redis_session session_894b7217ee284b2b88e69c6de76a2006

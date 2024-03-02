@@ -4,14 +4,17 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"github.com/gin-gonic/gin"
-	log "github.com/sirupsen/logrus"
 	"net/http"
+	"strings"
+
 	"time"
 	"user_system/config"
 	"user_system/internal/service"
 	"user_system/pkg/constant"
 	"user_system/utils"
+
+	"github.com/gin-gonic/gin"
+	log "github.com/sirupsen/logrus"
 )
 
 // Ping 健康检查
@@ -107,6 +110,7 @@ func GetUserInfo(c *gin.Context) {
 
 // UpdateNickName 更新用户昵称
 func UpdateNickName(c *gin.Context) {
+	fmt.Printf("call updatenick name ")
 	req := &service.UpdateNickNameRequest{}
 	rsp := &HttpResponse{}
 	err := c.ShouldBindJSON(req)
@@ -125,4 +129,48 @@ func UpdateNickName(c *gin.Context) {
 		return
 	}
 	rsp.ResponseSuccess(c)
+}
+
+// UpdateNickHead 更新用户头像 接收流  服务器访问不到是此处 参数固定无法更改
+func UpdateNickHead(c *gin.Context) {
+
+	req, err := c.FormFile("picture") //接收数据的流，数据格式为formdata 初始化。
+	if err != nil {
+		log.Error(err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	rsp := &HttpResponse{}
+
+	session, _ := c.Cookie(constant.SessionKey)
+	log.Infof("UpdateNickImag|session=%s", session)
+	//	ctx := context.WithValue(context.Background(), constant.SessionKey, session)
+	//	uuid := utils.Md5String(req.Filename + time.Now().GoString())
+	//	ctx = context.WithValue(ctx, "uuid", uuid)
+	// 处理上传的文件，例如保存到本地或进行其他操作
+	// if err := service.UpdateUserNickImage(ctx, req); err != nil {
+	// 	rsp.ResponseWithError(c, CodeUpdateUserInfoErr, err.Error())
+	// 	return
+	// }
+	//log.Info("json 函数对吗？ req  ", req)
+	// 创建一个新文件
+	parts := strings.Split(req.Filename, ".")
+	rename := "Head."
+	if len(parts) > 1 {
+		rename += parts[1]
+	}
+
+	// 保存上传的文件到指定路径
+	err = c.SaveUploadedFile(req, "web/static/images/"+rename)
+	if err != nil {
+		rsp.ResponseWithError(c, CodeUpdateUserInfoErr, err.Error())
+		return
+	}
+	image := map[string](string){"headurl": "static/images/" + rename}
+	imageinfo, _ := json.Marshal(image)
+	log.Info("UpdateNickImag File uploaded successfully")
+	// 这里只是简单地打印文件名和大小
+	log.Info("Received file: %s, Size: %d bytes\n", rename, req.Size)
+
+	rsp.ResponseWithData(c, imageinfo)
 }

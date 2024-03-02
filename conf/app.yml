@@ -4,7 +4,7 @@ cors_origin:
 app:
   app_name: "user_system" # 应用名称
   version: "v1.0.1" # 版本
-  port: 8080    # 服务启用端口
+  port: 8585    # 服务启用端口
   run_mode: release # 可选dev、release模式
 
 db:

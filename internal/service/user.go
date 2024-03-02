@@ -2,13 +2,15 @@ package service
 
 import (
 	"fmt"
-	log "github.com/sirupsen/logrus"
-	"golang.org/x/net/context"
+	//	"net/url"
 	"user_system/internal/cache"
 	"user_system/internal/dao"
 	"user_system/internal/model"
 	"user_system/pkg/constant"
 	"user_system/utils"
+
+	log "github.com/sirupsen/logrus"
+	"golang.org/x/net/context"
 )
 
 // Register 用户注册
@@ -118,16 +120,19 @@ func GetUserInfo(ctx context.Context, req *GetUserInfoRequest) (*GetUserInfoResp
 		log.Errorf("%s|session info not match with username=%s", uuid, req.UserName)
 	}
 	log.Infof("%s|Succ to GetUserInfo|user_name=%s|session=%s", uuid, req.UserName, session)
+	nickhead := "/images/Head.jpg"
 	return &GetUserInfoResponse{
 		UserName: user.Name,
 		Age:      user.Age,
 		Gender:   user.Gender,
 		PassWord: user.PassWord,
 		NickName: user.NickName,
+		NickHead: nickhead,
 	}, nil
 }
 
 func UpdateUserNickName(ctx context.Context, req *UpdateNickNameRequest) error {
+	fmt.Printf("call name....")
 	uuid := ctx.Value(constant.ReqUuid)
 	session := ctx.Value(constant.SessionKey).(string)
 	log.Infof("%s|UpdateUserNickName access from,user_name=%s|session=%s", uuid, req.UserName, session)
@@ -199,3 +204,33 @@ func updateUserInfo(user *model.User, userName, session string) error {
 	}
 	return nil
 }
+
+// 更新用户图片 处理流，不走数据库应该不用。
+// func UpdateUserNickImage(ctx context.Context, req string) error {
+// 	fmt.Printf("call img....")
+// 	uuid := ctx.Value(constant.ReqUuid)
+// 	session := ctx.Value(constant.SessionKey).(string)
+// 	log.Infof("%s|UpdateUserNickIMage access from,user_name=%s|session=%s", uuid, req, session)
+// 	log.Infof("UpdateUserNickImage|req==%v", req)
+
+// 	if session == "" || req == "" {
+// 		return fmt.Errorf("UpdateUserNickName|request params invalid")
+// 	}
+
+// 	user, err := cache.GetSessionInfo(session)
+// 	if err != nil {
+// 		log.Errorf("%s|Failed to get with session=%s|err =%v", uuid, session, err)
+// 		return fmt.Errorf("UpdateUserNickName|GetSessionInfo err:%v", err)
+// 	}
+
+// 	// // if req.NewHead != nil {
+// 	// // 	log.Errorf("UpdateUserNickName|%s|session info not match with username=%s", uuid, req.UserName)
+// 	// // }
+
+// 	// // updateUser := &model.User{
+// 	// // 	NickName: user.Name,
+// 	// // }
+
+// 	// return updateUserInfo(updateUser, req, session)
+// 	return fmt.Errorf("UpdateUserNickName|request params invalid%v", user)
+// }

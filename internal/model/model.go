@@ -24,6 +24,7 @@ type User struct {
 	Age      int    `gorm:"column:age"`      //年龄
 	PassWord string `gorm:"column:password"` //密码
 	NickName string `gorm:"column:nickname"` //昵称
+	//NickHead string `gorm:"column:nickHead"` //头像 fomdata使用静态文件存储。
 }
 
 // TableName 表名

@@ -57,7 +57,7 @@
             success: function (result) {
                 console.log("data is :" + result)
                 if (result.code == 0) {
-                    //alert("登陆成功");
+                    alert("登陆成功");
                     window.location.href = urlPrefix + "/static/index.html?name=" + username.value;
                     window.event.returnValue = false
                 }else {
