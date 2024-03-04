@@ -130,6 +130,32 @@ func GetUserInfo(ctx context.Context, req *GetUserInfoRequest) (*GetUserInfoResp
 		NickHead: nickhead,
 	}, nil
 }
+func DeleteUser(ctx context.Context, req *LogoutRequest) error {
+	fmt.Printf("call delete name....")
+	uuid := ctx.Value(constant.ReqUuid)
+	session := ctx.Value(constant.SessionKey).(string)
+	log.Infof("%s|DeleteUserInfo access from,user_name=%s|session=%s", uuid, req.UserName, session)
+	log.Infof("DeleteUserInfo|req==%v", req)
+
+	user, err := cache.GetSessionInfo(session)
+	if err != nil {
+		log.Errorf("%s|Failed to get with session=%s|err =%v", uuid, session, err)
+		return fmt.Errorf("DeleteUserInfo|GetSessionInfo err:%v", err)
+	}
+
+	if err = dao.DeleteUserInfo(user); err != nil {
+		log.Errorf("Delete|%v", err)
+		return fmt.Errorf("delete|%v", err)
+	}
+	err = cache.DelSessionInfo(session)
+	if err != nil {
+		log.Errorf("%s|Failed to delSessionInfo :%s", uuid, session)
+		return fmt.Errorf("del session err:%v", err)
+	}
+	log.Infof("%s|Success to delSessionInfo :%s", uuid, session)
+
+	return nil
+}
 
 func UpdateUserNickName(ctx context.Context, req *UpdateNickNameRequest) error {
 	fmt.Printf("call name....")

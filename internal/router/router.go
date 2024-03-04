@@ -27,6 +27,8 @@ func InitRouterAndServe() {
 	r.POST("/user/logout", AuthMiddleWare(), api.Logout)
 	// 获取用户信息
 	r.GET("/user/get_user_info", AuthMiddleWare(), api.GetUserInfo)
+	// 注销用户信息
+	r.GET("/user/delete_user", AuthMiddleWare(), api.DeleteUserInfo)
 	// 更新用户信息
 	r.POST("/user/update_nick_name", AuthMiddleWare(), api.UpdateNickName)
 	//更新用户头像

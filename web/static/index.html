@@ -31,7 +31,7 @@
         <div id="login_control">
             <button type="button" id="btn_edit" onclick="changeNickName()">修改昵称</button>
             <button type="button" id="btn_logout" onclick="logout()">登出</button>
-            <button type="button" id="btn_logout" onclick="logout()">注销</button>
+            <button type="button" id="btn_delete" onclick="deleteuser()">注销</button>
         </div>
     </div>
 </form>
@@ -90,7 +90,25 @@
         }
         return (false);
     }
-
+    function deleteuser(){
+        console.log("send to delete")
+        $.ajax({
+            type:"get",
+            dataType: "json",
+            url: urlPrefix + '/user/delete_user',
+            contentType: "application/json",
+            data: JSON.stringify({
+                "user_name": username.value,
+            }),
+            success: function (result) {
+                alert("注销成功");
+                window.location.href = urlPrefix + "/static/login.html";
+            },
+            error:function (result) {
+                alert("注销失败")
+            }
+        })
+    }
     function logout() {
         console.log("send to logout")
         $.ajax({

@@ -35,3 +35,13 @@ func CreateUser(user *model.User) error {
 func UpdateUserInfo(userName string, user *model.User) int64 {
 	return utils.GetDB().Model(&model.User{}).Where("`name` = ?", userName).Updates(user).RowsAffected
 }
+
+// DeleteUserInfo 更新昵称
+func DeleteUserInfo(user *model.User) error {
+	if err := utils.GetDB().Where("`name` = ?", user.Name).Delete(&model.User{}).Error; err != nil {
+		log.Errorf("Delete fail:%v", err)
+		return fmt.Errorf("Delete fail:%v", err)
+	}
+	log.Info("delete success")
+	return nil
+}

@@ -14,6 +14,7 @@ const (
 	CodeLogoutErr         ErrCode = 10004 // 登出错误
 	CodeGetUserInfoErr    ErrCode = 10005 // 获取用户信息错误
 	CodeUpdateUserInfoErr ErrCode = 10006 // 更新用户信息错误
+	CodeDeleteUserInfoErr ErrCode = 10006 // 更新用户信息错误
 )
 
 type (

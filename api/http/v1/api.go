@@ -108,6 +108,20 @@ func GetUserInfo(c *gin.Context) {
 	rsp.ResponseWithData(c, userInfo)
 }
 
+// DeleteUserInfo 删除用户信息
+func DeleteUserInfo(c *gin.Context) {
+	req := &service.LogoutRequest{}
+	rsp := &HttpResponse{}
+	session, _ := c.Cookie(constant.SessionKey)
+	ctx := context.WithValue(context.Background(), constant.SessionKey, session)
+
+	if err := service.DeleteUser(ctx, req); err != nil {
+		rsp.ResponseWithError(c, CodeDeleteUserInfoErr, err.Error())
+		return
+	}
+	rsp.ResponseSuccess(c)
+}
+
 // UpdateNickName 更新用户昵称
 func UpdateNickName(c *gin.Context) {
 	fmt.Printf("call updatenick name ")
@@ -144,16 +158,7 @@ func UpdateNickHead(c *gin.Context) {
 
 	session, _ := c.Cookie(constant.SessionKey)
 	log.Infof("UpdateNickImag|session=%s", session)
-	//	ctx := context.WithValue(context.Background(), constant.SessionKey, session)
-	//	uuid := utils.Md5String(req.Filename + time.Now().GoString())
-	//	ctx = context.WithValue(ctx, "uuid", uuid)
-	// 处理上传的文件，例如保存到本地或进行其他操作
-	// if err := service.UpdateUserNickImage(ctx, req); err != nil {
-	// 	rsp.ResponseWithError(c, CodeUpdateUserInfoErr, err.Error())
-	// 	return
-	// }
-	//log.Info("json 函数对吗？ req  ", req)
-	// 创建一个新文件
+
 	parts := strings.Split(req.Filename, ".")
 	rename := "Head."
 	if len(parts) > 1 {
